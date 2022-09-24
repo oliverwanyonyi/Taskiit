@@ -1,0 +1,329 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+ul {
+  list-style-type: none;
+}
+
+:root {
+  --color-white: #ffffff;
+  --color-white-variant1: #ececec;
+  --color-warning: #b32520;
+  --color-success: #0fe769;
+  --color-dark: rgb(22, 22, 22);
+  --color-dark-variant1: #292929;
+  --color-dark-variant2: #393939;
+  --color-bg: #060a1d;
+  --color-bg-variant1: #0b102b;
+  --transition: all 400ms ease;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-white);
+}
+
+.container {
+  width: 70%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+nav {
+  width: 100%;
+  height: 60px;
+  background: var(--color-bg-variant1);
+}
+
+.nav__container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.nav__brand {
+  font-size: 20px;
+  color: transparent;
+  background: linear-gradient(
+    to right,
+    var(--color-success),
+    var(--color-white-variant1)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.main {
+  width: 100%;
+  height: calc(100vh - 65px);
+}
+
+.create-task-btn {
+  position: fixed;
+  bottom: 4rem;
+  right: 8rem;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-success);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: var(--color-success);
+  transition: var(--transition);
+}
+.create-task-btn:hover {
+  animation: bounce 2.5s ease-in-out infinite;
+}
+
+.tasks__container {
+  padding: 30px 0;
+}
+
+.tasks__row {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.task__col {
+  width: 40%;
+}
+
+.task {
+  padding: 13px 13px 13px 74px;
+  border-radius: 15px;
+  background: var(--color-bg-variant1);
+  position: relative;
+}
+
+/* postion the check button to the left */
+.task .mark-task-complete {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1rem;
+}
+/* hide the checkbox */
+
+input[type="checkbox"] {
+  display: none;
+}
+
+/* use the label for the checkbox as the actual checkbox */
+.check {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #ececec;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+/* hide the tick mark */
+.check i {
+  font-size: 10px;
+  display: none;
+}
+
+/* change the background of the check label to light green */
+.task.completed .check {
+  background: #0fe769;
+  border-color: #0fe769;
+}
+/* reveal the check mark */
+.task.completed .check i {
+  display: block;
+}
+/* style the title of the task */
+.task__title {
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 400;
+  margin: 15px 0;
+}
+
+.task__actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+/* style the buttons */
+.task__actions .btn {
+  color: var(--color-white);
+  font-size: 17px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.task__actions .btn.edit__btn {
+  color: var(--color-success);
+}
+
+.task__actions .btn.delete__btn {
+  color: var(--color-warning);
+}
+
+/* when a task is complete we toggle this class with javascript which changes the opacity of the task */
+.task.completed {
+  opacity: 0.9;
+}
+/* when we toggle complete class on the task element change the style of the 
+title text decoration tio line-through */
+.task.completed .task__title {
+  color: #969696;
+  text-decoration: line-through;
+}
+
+.landing__text {
+  color: var(--color-white-variant1);
+  padding: 10px 0;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 30px;
+  display: none;
+}
+
+.tasks__row:empty + .landing__text {
+  display: block;
+}
+
+/* modal css */
+
+.task__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  opacity: 0;
+  visibility: hidden;
+}
+/* we will toggle this class later with js to show the task__modal */
+.task__modal.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* we will be able to click on this overlay to close the task modal */
+
+.task__modal-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 3;
+}
+/* to be on top of modal overlay which has a z-index of 3 */
+.task__modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-bg-variant1);
+  padding: 20px 15px;
+  height: min-content;
+  width: 40vw;
+  z-index: 6;
+}
+
+/* pasted in the rest of the css for the form */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 20px;
+  font-weight: 200;
+  color: var(--color-white-variant1);
+  text-transform: capitalize;
+}
+
+.form-control {
+  background: var(--color-bg);
+  width: 100%;
+  padding: 0 20px;
+  height: 50px;
+  font-size: 15px;
+  color: var(--color-white);
+  border-radius: 10px;
+}
+
+.submit-btn {
+  color: var(--color-white);
+  cursor: pointer;
+  background-color: var(--color-success);
+  padding: 13px 20px;
+  width: 50%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 10px;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+  .task__col {
+    width: 80%;
+  }
+  .task__modal-container {
+    width: 65vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 94%;
+  }
+  .task__col {
+    width: 90%;
+  }
+  .create-task-btn {
+    bottom: 3rem;
+    right: 3rem;
+  }
+  .task__modal-container {
+    width: 90vw;
+  }
+  .submit-btn {
+    width: 100%;
+  }
+}

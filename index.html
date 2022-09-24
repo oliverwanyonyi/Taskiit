@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskiit</title>
+    <link rel="stylesheet" href="css/all.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="container nav__container">
+        <h1 class="nav__brand">Taskiit</h1>
+      </div>
+    </nav>
+    <main class="main">
+      <div class="tasks__container">
+        <!-- unordered list must be like this for css to work -->
+        <ul class="tasks__row"></ul>
+        <!-- template -->
+        <!-- 
+
+<li class="task__col">
+            <div class="task">
+              <span class="mark-task-complete">
+                <input type="checkbox" id="checkbox" />
+                <label for="checkbox" class="check">
+                  <i class="fas fa-check"></i>
+                </label>
+              </span>
+
+              <div class="task__info">
+                <h2 class="task__title">Lorem.</h2>
+                <div class="task__actions">
+                  <button class="btn delete__btn">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                  <button class="btn edit__btn">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+
+         -->
+        <p class="landing__text">Once you create tasks they will appear here</p>
+      </div>
+      <div class="task__modal">
+        <!-- task container should not be inside the modal overlay -->
+        <div class="task__modal-overlay"></div>
+          <div class="task__modal-container">
+            <form class="form">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input
+                  type="text"
+                  id="title"
+                  placeholder="learn a new language"
+                  class="form-control"
+                />
+              </div>
+              <button class="submit-btn">Create</button>
+            </form>
+          </div>
+      </div>
+      <span class="create-task-btn">
+        <i class="fas fa-plus"></i>
+      </span>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
